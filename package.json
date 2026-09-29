@@ -1,0 +1,14 @@
+{
+  "name": "blue-bay-diner-concept",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Concept demo site — Blue Bay Diner, Flushing NY. Not affiliated.",
+  "scripts": {
+    "build": "tailwindcss -i ./src/input.css -o ./dist/output.css --minify",
+    "watch": "tailwindcss -i ./src/input.css -o ./dist/output.css --watch"
+  },
+  "devDependencies": {
+    "@tailwindcss/cli": "^4.1.0",
+    "tailwindcss": "^4.1.0"
+  }
+}

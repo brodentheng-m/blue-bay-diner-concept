@@ -1,0 +1,74 @@
+@import "tailwindcss";
+
+/* ============================================================
+   STRICT DESIGN RULE — enforced at the CSS layer.
+   Forbidden color families: purple / violet / indigo.
+   Remapped below so those utilities RENDER on-palette even if written.
+   Verify compiled hex VALUES, never the presence/absence of var NAMES
+   (Tailwind v4 tree-shakes unused @theme vars).
+   ============================================================ */
+
+@theme {
+  --font-display: "Playfair Display", ui-serif, Georgia, serif;
+  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+
+  /* --- Blue Bay Diner palette: classic American diner --- */
+  --color-brand-50:  #fef6f4;
+  --color-brand-100: #fde7e2;
+  --color-brand-200: #f9ccc2;
+  --color-brand-300: #f2a494;
+  --color-brand-400: #e87662;
+  --color-brand-500: #d94f38;   /* primary red */
+  --color-brand-600: #bf3a25;
+  --color-brand-700: #9e2f1e;
+  --color-brand-800: #82291c;
+  --color-brand-900: #6b241a;
+
+  --color-cream-50:  #fffdf8;
+  --color-cream-100: #fdf8ee;
+  --color-cream-200: #f8efdc;
+
+  --color-chrome-400: #9aa2ab;
+  --color-chrome-600: #5c6670;
+  --color-chrome-800: #2f3740;
+
+  /* --- guardrail remaps: forbidden hues -> neutral chrome --- */
+  --color-purple-50:  #f8fafc;
+  --color-purple-100: #f1f5f9;
+  --color-purple-500: #5c6670;
+  --color-purple-600: #2f3740;
+  --color-purple-700: #1e293b;
+  --color-violet-50:  #f8fafc;
+  --color-violet-100: #f1f5f9;
+  --color-violet-500: #5c6670;
+  --color-violet-600: #2f3740;
+  --color-violet-700: #1e293b;
+  --color-indigo-50:  #f8fafc;
+  --color-indigo-100: #f1f5f9;
+  --color-indigo-500: #5c6670;
+  --color-indigo-600: #2f3740;
+  --color-indigo-700: #1e293b;
+}
+
+@layer components {
+  .shell      { @apply mx-auto w-full max-w-6xl px-5 sm:px-8; }
+  /* In Tailwind v4 a custom component class cannot be @apply'd into another,
+     so shared button/base styles are repeated rather than composed. */
+  .btn        { @apply inline-flex items-center justify-center gap-2 rounded-lg px-6 py-3 text-base font-semibold transition; }
+  .btn-primary{ @apply inline-flex items-center justify-center gap-2 rounded-lg px-6 py-3 text-base font-semibold transition bg-brand-600 text-white shadow-sm hover:bg-brand-700; }
+  .btn-ghost  { @apply inline-flex items-center justify-center gap-2 rounded-lg px-6 py-3 text-base font-semibold transition border border-white/40 text-white hover:bg-white/10; }
+  .eyebrow    { @apply text-xs font-semibold uppercase tracking-[0.18em]; }
+  .h-display  { @apply font-display font-bold tracking-tight; }
+  .card       { @apply rounded-xl border border-chrome-800/10 bg-white p-6 shadow-sm; }
+  .ph         { @apply rounded-lg border-2 border-dashed border-chrome-800/20 bg-cream-100 flex items-center justify-center text-center; }
+  /* inline tel: links measure ~20px tall without this */
+  .tap        { @apply inline-flex items-center min-h-[44px]; }
+}
+
+html { scroll-behavior: smooth; }
+body { font-family: var(--font-sans); }
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  * { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
+}
