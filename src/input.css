@@ -2,9 +2,8 @@
 
 /* ============================================================
    STRICT DESIGN RULE — enforced at the CSS layer.
-   Forbidden color families: purple / violet / indigo.
-   Remapped below so those utilities RENDER on-palette even if written.
-   Verify compiled hex VALUES, never the presence/absence of var NAMES
+   Forbidden: purple / violet / indigo. Remapped below so those utilities RENDER
+   on-palette even if written. Verify compiled hex VALUES, never var NAMES
    (Tailwind v4 tree-shakes unused @theme vars).
    ============================================================ */
 
@@ -12,13 +11,12 @@
   --font-display: "Playfair Display", ui-serif, Georgia, serif;
   --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
 
-  /* --- Blue Bay Diner palette: classic American diner --- */
   --color-brand-50:  #fef6f4;
   --color-brand-100: #fde7e2;
   --color-brand-200: #f9ccc2;
   --color-brand-300: #f2a494;
   --color-brand-400: #e87662;
-  --color-brand-500: #d94f38;   /* primary red */
+  --color-brand-500: #d94f38;
   --color-brand-600: #bf3a25;
   --color-brand-700: #9e2f1e;
   --color-brand-800: #82291c;
@@ -32,43 +30,152 @@
   --color-chrome-600: #5c6670;
   --color-chrome-800: #2f3740;
 
-  /* --- guardrail remaps: forbidden hues -> neutral chrome --- */
-  --color-purple-50:  #f8fafc;
-  --color-purple-100: #f1f5f9;
-  --color-purple-500: #5c6670;
-  --color-purple-600: #2f3740;
-  --color-purple-700: #1e293b;
-  --color-violet-50:  #f8fafc;
-  --color-violet-100: #f1f5f9;
-  --color-violet-500: #5c6670;
-  --color-violet-600: #2f3740;
-  --color-violet-700: #1e293b;
-  --color-indigo-50:  #f8fafc;
-  --color-indigo-100: #f1f5f9;
-  --color-indigo-500: #5c6670;
-  --color-indigo-600: #2f3740;
-  --color-indigo-700: #1e293b;
+  --color-purple-50:#f8fafc; --color-purple-100:#f1f5f9; --color-purple-500:#5c6670;
+  --color-purple-600:#2f3740; --color-purple-700:#1e293b;
+  --color-violet-50:#f8fafc; --color-violet-100:#f1f5f9; --color-violet-500:#5c6670;
+  --color-violet-600:#2f3740; --color-violet-700:#1e293b;
+  --color-indigo-50:#f8fafc; --color-indigo-100:#f1f5f9; --color-indigo-500:#5c6670;
+  --color-indigo-600:#2f3740; --color-indigo-700:#1e293b;
 }
 
 @layer components {
-  .shell      { @apply mx-auto w-full max-w-6xl px-5 sm:px-8; }
-  /* In Tailwind v4 a custom component class cannot be @apply'd into another,
-     so shared button/base styles are repeated rather than composed. */
+  .shell      { @apply mx-auto w-full max-w-[1400px] px-6 sm:px-10; }
   .btn        { @apply inline-flex items-center justify-center gap-2 rounded-lg px-6 py-3 text-base font-semibold transition; }
   .btn-primary{ @apply inline-flex items-center justify-center gap-2 rounded-lg px-6 py-3 text-base font-semibold transition bg-brand-600 text-white shadow-sm hover:bg-brand-700; }
   .btn-ghost  { @apply inline-flex items-center justify-center gap-2 rounded-lg px-6 py-3 text-base font-semibold transition border border-white/40 text-white hover:bg-white/10; }
-  .eyebrow    { @apply text-xs font-semibold uppercase tracking-[0.18em]; }
+  .eyebrow    { @apply text-sm font-bold uppercase tracking-[0.14em]; }
   .h-display  { @apply font-display font-bold tracking-tight; }
-  .card       { @apply rounded-xl border border-chrome-800/10 bg-white p-6 shadow-sm; }
-  .ph         { @apply rounded-lg border-2 border-dashed border-chrome-800/20 bg-cream-100 flex items-center justify-center text-center; }
-  /* inline tel: links measure ~20px tall without this */
   .tap        { @apply inline-flex items-center min-h-[44px]; }
+  .photo-credit {
+    @apply absolute bottom-4 right-4 z-20 rounded bg-black/55 px-3.5 py-2 text-[14px] leading-tight text-white/90;
+    backdrop-filter: blur(4px);
+  }
 }
 
 html { scroll-behavior: smooth; }
 body { font-family: var(--font-sans); }
 
+/* ============================================================
+   SCROLL-SCRUBBED SCENE SEQUENCE
+   --p : overall scroll progress 0..1 across the whole narrative
+   --scene : current scene index (fractional — drives the wipe)
+   Each scene's background is revealed by a CIRCLE that grows from a dot to
+   full screen as you scroll. The outgoing scene sits underneath; the incoming
+   scene is clipped by a `circle()` whose radius tracks scroll progress.
+   ============================================================ */
+
+:root { --p: 0; --scene: 0; }
+
+/* --- pinned stage --- */
+#stage {
+  position: sticky;
+  top: 0;
+  height: 100svh;
+  overflow: hidden;
+  background: #3f1410;
+}
+
+/* stacked background layers; only the active one is un-clipped */
+.scene-bg {
+  position: absolute;
+  inset: 0;
+  background-size: cover;
+  background-position: center;
+  /* the circular reveal: radius goes 0% (a dot) -> 150% (covers the screen) */
+  clip-path: circle(var(--reveal, 0%) at var(--ox, 50%) var(--oy, 50%));
+  transition: clip-path .12s linear;
+  will-change: clip-path;
+}
+.scene-bg::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(20,8,6,.72) 0%, rgba(20,8,6,.58) 45%, rgba(20,8,6,.88) 100%);
+}
+/* colour-only scenes (no photo) */
+.scene-bg.solid::after { background: none; }
+
+/* the expanding dot itself, visible while a wipe is in flight */
+#wipe-dot {
+  position: absolute;
+  left: var(--ox, 50%);
+  top: var(--oy, 50%);
+  width: 14px;
+  height: 14px;
+  margin: -7px 0 0 -7px;
+  border-radius: 9999px;
+  background: rgba(255,255,255,.9);
+  box-shadow: 0 0 0 4px rgba(255,255,255,.25), 0 0 28px 8px rgba(255,255,255,.35);
+  opacity: var(--dot-op, 0);
+  pointer-events: none;
+  z-index: 12;
+}
+
+/* --- scene copy: one block per scene, cross-faded by scroll --- */
+.scene-copy {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding-block: 2rem;
+  z-index: 20;
+  pointer-events: none;
+  opacity: var(--copy-op, 0);
+  transform: translate3d(0, var(--copy-y, 12px), 0);
+  /* Short interpolation between scroll frames: takes the stepping out of
+     wheel/trackpad input so the type glides rather than jitters. */
+  transition: opacity .18s linear, transform .22s cubic-bezier(.22,1,.36,1);
+  will-change: opacity, transform;
+}
+.scene-copy > * { pointer-events: auto; }
+
+/* --- fixed deck of dots / progress rail on the right --- */
+#rail {
+  position: fixed;
+  right: 18px;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 30;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.rail-dot {
+  display: block;
+  width: 9px;
+  height: 9px;
+  border-radius: 9999px;
+  background: rgba(255,255,255,.45);
+  transition: background-color .3s ease-out, transform .3s ease-out;
+}
+.rail-dot.is-on { background: #fff; transform: scale(1.5); box-shadow: 0 0 10px 2px rgba(255,255,255,.55); }
+
+/* --- the tall scroll runway that drives everything --- */
+#runway { position: relative; z-index: 0; }
+
+/* --- section nav in the header --- */
+.nav-link {
+  @apply relative px-3 py-2 text-[16px] font-semibold text-white/90 transition-colors hover:text-white min-h-[48px] inline-flex items-center;
+}
+.nav-link[aria-current="true"] { @apply text-white; }
+.nav-link[aria-current="true"]::after {
+  content: "";
+  @apply absolute inset-x-2 bottom-1 h-0.5 rounded-full bg-brand-300;
+}
+
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
-  * { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
+  .scene-bg { clip-path: none !important; opacity: 0; }
+  .scene-bg.is-current { opacity: 1; }
+  .scene-copy { opacity: 0 !important; transform: none !important; }
+  .scene-copy.is-current { opacity: 1 !important; }
+  #wipe-dot { display: none; }
 }
+
+/* no-JS: show every scene stacked as normal sections */
+html.no-js #stage { position: relative; height: auto; }
+html.no-js .scene-bg { clip-path: none !important; position: relative; height: 70vh; opacity: 1; }
+html.no-js .scene-copy { opacity: 1 !important; transform: none !important; position: relative; }
+html.no-js #runway { height: auto !important; }
+html.no-js #wipe-dot, html.no-js #rail { display: none; }

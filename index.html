@@ -1,381 +1,298 @@
 <!DOCTYPE html>
-<!-- STRICT DESIGN RULE: purple / violet / indigo are FORBIDDEN and remapped in src/input.css.
-     CONTENT RULE: only facts from PLAN.md's verified table. No invented dishes, prices,
-     reviews, staff, or awards. This is an uncommissioned concept demo — the "not affiliated"
-     disclosure banner and footer are REQUIRED and must not be removed. -->
-<html lang="en">
+<!-- STRICT DESIGN RULE: purple / violet / indigo FORBIDDEN and remapped in src/input.css.
+     CONTENT RULE: only verified facts. No invented dishes, prices, reviews, staff, awards.
+     PHOTO RULE: photos are Wikimedia Commons stock, NOT Blue Bay Diner. Credit chips and
+     the footer attribution are REQUIRED. DISCLOSURE banner + footer are REQUIRED. -->
+<html lang="en" class="no-js">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Blue Bay Diner — Concept Design</title>
 <meta name="robots" content="noindex, nofollow">
 <meta name="description" content="Concept website design for Blue Bay Diner, Flushing NY. Not an official site.">
+<script>document.documentElement.classList.remove("no-js");</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700;800;900&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="./dist/output.css">
 <script src="./src/assets/js/main.js" defer></script>
 </head>
-<body class="bg-cream-50 text-chrome-800 antialiased">
+<body class="bg-chrome-800 text-white antialiased">
 
 <!-- ============ DISCLOSURE BANNER (required) ============ -->
-<div id="concept-banner" class="bg-chrome-800 text-white">
+<div id="concept-banner" class="relative z-50 bg-chrome-800 text-white">
   <div class="shell flex items-center gap-4 py-2.5">
-    <p class="flex-1 text-[13px] leading-snug">
+    <p class="flex-1 text-[15px] leading-snug">
       <strong class="font-semibold">Concept design — not affiliated with Blue Bay Diner.</strong>&nbsp;
       <span class="text-white/80">An unsolicited design sample, not their official website.</span>
     </p>
     <button id="concept-banner-close" type="button" aria-label="Dismiss concept notice"
-            class="shrink-0 rounded-md px-2 py-1 text-white/80 hover:bg-white/10 hover:text-white">
+            class="shrink-0 rounded-md px-2.5 py-2.5 text-white/80 hover:bg-white/10 hover:text-white min-h-[44px] min-w-[44px] inline-flex items-center justify-center">
       <span aria-hidden="true" class="text-lg leading-none">&times;</span>
     </button>
   </div>
 </div>
 
-<!-- ============ HEADER ============ -->
-<header class="sticky top-0 z-40 border-b border-chrome-800/10 bg-cream-50/95 backdrop-blur">
-  <div class="shell flex items-center justify-between gap-4 py-3">
-    <a href="#top" class="flex items-baseline gap-2">
-      <span class="h-display text-xl text-brand-700 sm:text-2xl">Blue Bay Diner</span>
+<!-- ============ HEADER (arrives with the logo on scroll) ============ -->
+<header id="site-header" class="sticky top-0 z-40 border-b border-white/10 bg-chrome-800/95 backdrop-blur">
+  <div class="shell flex items-center justify-between gap-4 py-2.5">
+    <a href="#top" class="flex items-baseline gap-2 shrink-0">
+      <span id="header-title" class="h-display text-2xl text-white sm:text-3xl">Blue Bay Diner</span>
     </a>
 
-    <nav aria-label="Primary" class="hidden items-center gap-7 md:flex">
-      <a href="#serve"   class="text-sm font-medium hover:text-brand-700">Our Kitchen</a>
-      <a href="#menu"    class="text-sm font-medium hover:text-brand-700">Menu</a>
-      <a href="#visit"   class="text-sm font-medium hover:text-brand-700">Hours &amp; Location</a>
+    <nav id="jumpbar" aria-label="Sections" class="hidden items-center gap-0.5 lg:flex">
+      <a href="#scene-1" class="nav-link" data-scene="1">The Problem</a>
+      <a href="#scene-2" class="nav-link" data-scene="2">What We Serve</a>
+      <a href="#scene-3" class="nav-link" data-scene="3">The Food</a>
+      <a href="#scene-4" class="nav-link" data-scene="4">The Room</a>
+      <a href="#scene-5" class="nav-link" data-scene="5">Hours</a>
     </nav>
 
-    <div class="flex items-center gap-2">
-      <a href="tel:+17182256333" class="btn-primary !px-4 !py-3 text-sm !min-h-[44px]">Call Now</a>
+    <div class="flex items-center gap-2 shrink-0">
+      <a href="tel:+17182256333" class="btn-primary !px-5 !py-3 text-base !min-h-[48px]">Call</a>
       <button id="nav-toggle" type="button" aria-expanded="false" aria-controls="nav-menu"
               aria-label="Open menu"
-              class="rounded-lg border border-chrome-800/15 p-2.5 md:hidden">
+              class="rounded-lg border border-white/20 p-2.5 text-white lg:hidden">
         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
              stroke-linecap="round" aria-hidden="true"><path d="M3 6h18M3 12h18M3 18h18"/></svg>
       </button>
     </div>
   </div>
 
-  <nav id="nav-menu" aria-label="Mobile" class="hidden border-t border-chrome-800/10 bg-cream-50 md:hidden">
+  <nav id="nav-menu" aria-label="Mobile" class="hidden border-t border-white/10 bg-chrome-800 lg:hidden">
     <div class="shell flex flex-col py-2">
-      <a href="#serve" class="border-b border-chrome-800/5 py-3.5 font-medium">Our Kitchen</a>
-      <a href="#menu"  class="border-b border-chrome-800/5 py-3.5 font-medium">Menu</a>
-      <a href="#visit" class="py-3.5 font-medium">Hours &amp; Location</a>
+      <a href="#scene-1" class="border-b border-white/5 py-3.5 font-medium">The Problem</a>
+      <a href="#scene-2" class="border-b border-white/5 py-3.5 font-medium">What We Serve</a>
+      <a href="#scene-3" class="border-b border-white/5 py-3.5 font-medium">The Food</a>
+      <a href="#scene-4" class="border-b border-white/5 py-3.5 font-medium">The Room</a>
+      <a href="#scene-5" class="border-b border-white/5 py-3.5 font-medium">Hours</a>
     </div>
   </nav>
 </header>
 
 <main id="top">
 
-  <!-- ============ HERO ============ -->
-  <section class="bg-brand-700 text-white">
-    <div class="shell grid gap-10 py-14 sm:py-20 lg:grid-cols-[1.15fr_0.85fr] lg:items-center">
-      <div>
-        <p class="eyebrow mb-5 text-brand-200">Flushing, Queens &middot; A neighborhood diner</p>
-        <h1 class="h-display text-4xl leading-[1.08] sm:text-5xl lg:text-6xl">
-          Classic diner cooking,<br>served all day.
-        </h1>
-        <p class="mt-6 max-w-xl text-lg leading-relaxed text-white/90">
+  <!-- ============================================================
+       PINNED STAGE — backgrounds wipe in via an expanding circle as you scroll
+       ============================================================ -->
+  <div id="stage" aria-hidden="false">
+
+    <!-- --- background layers (bottom = first scene) --- -->
+    <!-- scene 0: cover — interior photo -->
+    <div class="scene-bg is-current" data-bg="0"
+         style="background-image:url('./src/assets/img/interior-counter.jpg'); --reveal:150%"></div>
+    <!-- scene 1: the problem — dark, no photo -->
+    <div class="scene-bg solid" data-bg="1" style="background:#20262c"></div>
+    <!-- scene 2: what we serve — diner exterior at night -->
+    <div class="scene-bg" data-bg="2"
+         style="background-image:url('./src/assets/img/diner-classic.jpg')"></div>
+    <!-- scene 3: the food — burger -->
+    <div class="scene-bg" data-bg="3"
+         style="background-image:url('./src/assets/img/food-burger.jpg')"></div>
+    <!-- scene 4: the room — counter with stools -->
+    <div class="scene-bg" data-bg="4"
+         style="background-image:url('./src/assets/img/interior-stools.jpg')"></div>
+    <!-- scene 5: hours — warm solid -->
+    <div class="scene-bg solid" data-bg="5" style="background:#6b241a"></div>
+    <!-- scene 6: call — brand red -->
+    <div class="scene-bg solid" data-bg="6" style="background:#9e2f1e"></div>
+
+    <!-- the expanding dot -->
+    <div id="wipe-dot" aria-hidden="true"></div>
+
+    <!-- credit chip tracks the currently visible photo scene -->
+    <span class="photo-credit" id="credit-chip" data-credit="0">Representative photo — not Blue Bay Diner</span>
+
+    <!-- --- scene copy --- -->
+    <div class="scene-copy" data-copy="0">
+      <div class="shell text-center">
+        <p class="eyebrow text-brand-200 !text-[14px] sm:!text-[15px]">Flushing, Queens &middot; A neighborhood diner</p>
+        <h1 class="h-display mt-5 text-6xl leading-[1.0] sm:text-8xl lg:text-[10rem]">Blue Bay<br>Diner</h1>
+        <p class="mx-auto mt-7 max-w-2xl text-lg leading-relaxed text-white/95 sm:text-2xl">
           An old-school diner serving hefty portions of breakfast fare, burgers,
           and made-from-scratch desserts.
         </p>
+        <p class="mt-10 text-[15px] font-semibold uppercase tracking-[0.2em] text-white">Scroll</p>
+      </div>
+    </div>
 
-        <div class="mt-8 flex flex-col gap-3 sm:flex-row sm:items-center">
-          <a href="tel:+17182256333" class="btn-primary bg-white !text-brand-700 hover:!bg-cream-100">
-            Call (718) 225-6333
-          </a>
-          <a href="https://maps.google.com/?q=58-50+Francis+Lewis+Blvd,+Flushing,+NY+11365"
-             target="_blank" rel="noopener" class="btn-ghost !border-cream-100/70 hover:!bg-cream-100 hover:!text-brand-700">Get Directions</a>
-        </div>
-
-        <div class="mt-8 flex flex-wrap items-center gap-x-4 gap-y-3 text-sm text-white/85">
-          <span class="inline-flex items-baseline gap-1.5">
-            <span class="font-semibold text-white">4.2</span>
-            <span aria-hidden="true" class="text-amber-300">&#9733;</span>
-            <span class="text-white/70">on Google</span>
-          </span>
-          <span aria-hidden="true" class="hidden text-white/30 sm:inline">&middot;</span>
-          <span>Open until 12 AM</span>
-          <span aria-hidden="true" class="hidden text-white/30 sm:inline">&middot;</span>
-          <span>58-50 Francis Lewis Blvd</span>
+    <div class="scene-copy" data-copy="1">
+      <div class="shell">
+        <div class="mx-auto max-w-5xl text-center">
+          <p class="eyebrow text-brand-300 !text-[14px] sm:!text-[15px]">The problem</p>
+          <h2 class="h-display mt-6 text-6xl sm:text-8xl lg:text-[7.5rem]">Your Google listing sends customers to a dead page.</h2>
+          <p class="mx-auto mt-6 max-w-4xl text-xl leading-relaxed text-white/95 sm:text-3xl">
+            Searching for <strong class="text-white">Blue Bay Diner</strong> points to
+            <code class="rounded bg-white/10 px-1.5 py-0.5 text-[15px] text-brand-200">bluebay1.com</code>,
+            which no longer hosts a website.
+          </p>
+          <div class="mx-auto mt-9 max-w-2xl overflow-hidden rounded-xl bg-white text-left shadow-lg">
+            <div class="flex items-center gap-2 border-b border-chrome-800/10 bg-cream-100 px-4 py-2.5">
+              <span class="flex gap-1.5" aria-hidden="true">
+                <span class="h-2.5 w-2.5 rounded-full bg-chrome-800/20"></span>
+                <span class="h-2.5 w-2.5 rounded-full bg-chrome-800/20"></span>
+                <span class="h-2.5 w-2.5 rounded-full bg-chrome-800/20"></span>
+              </span>
+              <span class="truncate rounded bg-white px-3 py-1.5 text-[14px] text-chrome-600">https://www.bluebay1.com</span>
+            </div>
+            <div class="flex items-start gap-3 px-5 py-5">
+              <span aria-hidden="true" class="mt-0.5 text-lg text-brand-600">&#9888;</span>
+              <div>
+                <p class="text-lg font-semibold text-chrome-800">Your connection is not private</p>
+                <p class="mt-1.5 text-base leading-relaxed text-chrome-600">
+                  Attackers might be trying to steal your information. This site has no valid security certificate.
+                </p>
+              </div>
+            </div>
+          </div>
+          <p class="mt-7 text-lg text-white/80">
+            That warning reads as &ldquo;this place might be a scam&rdquo; &mdash; right when someone is deciding where to eat.
+          </p>
         </div>
       </div>
-
-      <!-- Hero panel: states what the diner does, WITHOUT repeating the contact block
-           already shown in the meta strip. No fabricated food photography. -->
-      <div class="rounded-2xl bg-brand-800/80 p-7 shadow-lg ring-1 ring-white/25 sm:p-9">
-        <p class="eyebrow text-brand-200">Dine in &middot; Takeout</p>
-        <h2 class="h-display mt-3 text-2xl">Breakfast, lunch &amp; dinner</h2>
-        <p class="mt-3 text-sm leading-relaxed text-white/85">
-          Serving the neighborhood seven days a week, from early breakfast
-          through a late dinner. Call ahead for today's specials and takeout.
-        </p>
-
-        <ul class="mt-7 space-y-3 border-t border-white/15 pt-6 text-sm text-white/90">
-          <li class="flex items-start gap-3">
-            <span aria-hidden="true" class="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-brand-300"></span>
-            <span>Hefty breakfast plates from opening</span>
-          </li>
-          <li class="flex items-start gap-3">
-            <span aria-hidden="true" class="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-brand-300"></span>
-            <span>Burgers and diner classics, cooked to order</span>
-          </li>
-          <li class="flex items-start gap-3">
-            <span aria-hidden="true" class="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-brand-300"></span>
-            <span>Made-from-scratch desserts</span>
-          </li>
-          <li class="flex items-start gap-3">
-            <span aria-hidden="true" class="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-brand-300"></span>
-            <span>Open daily until midnight</span>
-          </li>
-        </ul>
-
-        <a href="tel:+17182256333" class="tap mt-6 text-sm font-semibold text-white underline decoration-white/40 underline-offset-4">
-          Call to order &mdash; (718) 225-6333
-        </a>
-      </div>      </div>
     </div>
-  </section>
 
-  <!-- ============ THE PITCH SECTION ============ -->
-  <section class="border-b border-chrome-800/10 bg-cream-100">
-    <div class="shell py-12 sm:py-14">
-      <div class="mx-auto max-w-3xl text-center">
-        <p class="eyebrow text-brand-600">A note about this page</p>
-        <h2 class="h-display mt-3 text-2xl sm:text-3xl">
-          Your Google listing currently sends customers here &rarr;
-        </h2>
-        <p class="mt-4 text-[15px] leading-relaxed text-chrome-600">
-          Searching for <strong class="text-chrome-800">Blue Bay Diner</strong> on Google
-          points to <code class="rounded bg-white px-1.5 py-0.5 text-[13px] text-brand-700">bluebay1.com</code>,
-          which no longer hosts a website. Visitors get a browser security warning instead of
-          your menu &mdash; which reads as &ldquo;this place might be a scam.&rdquo;
-        </p>
+    <div class="scene-copy" data-copy="2">
+      <div class="shell">
+        <div class="max-w-6xl">
+          <p class="eyebrow text-brand-200 !text-[14px] sm:!text-[15px]">What we serve</p>
+          <h2 class="h-display mt-6 text-6xl sm:text-8xl lg:text-[7.5rem]">Breakfast, lunch &amp; dinner.</h2>
+          <p class="mt-7 max-w-5xl text-2xl leading-relaxed text-white/95 sm:text-3xl">
+            Serving the neighborhood seven days a week, from early breakfast through a late
+            dinner. Nothing fancy &mdash; just generous plates served the way a neighborhood
+            diner should.
+          </p>
+          <ul class="mt-10 grid gap-6 text-2xl text-white/95 sm:text-3xl sm:grid-cols-2">
+            <li class="flex items-start gap-3"><span aria-hidden="true" class="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-brand-300"></span><span>Hefty breakfast plates from opening</span></li>
+            <li class="flex items-start gap-3"><span aria-hidden="true" class="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-brand-300"></span><span>Lunch and dinner, cooked to order</span></li>
+            <li class="flex items-start gap-3"><span aria-hidden="true" class="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-brand-300"></span><span>Made-from-scratch desserts</span></li>
+            <li class="flex items-start gap-3"><span aria-hidden="true" class="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-brand-300"></span><span>Takeout by phone</span></li>
+          </ul>
+        </div>
+      </div>
+    </div>
 
-        <div class="mx-auto mt-8 max-w-xl overflow-hidden rounded-xl border border-chrome-800/15 bg-white text-left shadow-sm">
-          <div class="flex items-center gap-2 border-b border-chrome-800/10 bg-cream-100 px-4 py-2.5">
-            <span class="flex gap-1.5" aria-hidden="true">
-              <span class="h-2.5 w-2.5 rounded-full bg-chrome-800/20"></span>
-              <span class="h-2.5 w-2.5 rounded-full bg-chrome-800/20"></span>
-              <span class="h-2.5 w-2.5 rounded-full bg-chrome-800/20"></span>
+    <div class="scene-copy" data-copy="3">
+      <div class="shell">
+        <div class="max-w-6xl">
+          <p class="eyebrow text-brand-200 !text-[14px] sm:!text-[15px]">The food</p>
+          <h2 class="h-display mt-6 text-6xl sm:text-8xl lg:text-[7.5rem]">Burgers &amp; diner classics.</h2>
+          <p class="mt-7 max-w-5xl text-2xl leading-relaxed text-white/95 sm:text-3xl">
+            The standards you already know, cooked to order and served through the evening.
+            Ask about today's specials when you call.
+          </p>
+          <p class="mt-9 text-lg text-white/85">This is where the real food photos go &mdash; the ones from your own kitchen.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="scene-copy" data-copy="4">
+      <div class="shell">
+        <div class="max-w-6xl">
+          <p class="eyebrow text-brand-200 !text-[14px] sm:!text-[15px]">The room</p>
+          <h2 class="h-display mt-6 text-6xl sm:text-8xl lg:text-[7.5rem]">Pull up a stool.</h2>
+          <p class="mt-7 max-w-5xl text-2xl leading-relaxed text-white/95 sm:text-3xl">
+            Open daily until midnight with wheelchair accessible entrance. Dine in, take out,
+            or call ahead for a large order.
+          </p>
+          <div class="mt-9 inline-flex flex-wrap items-center gap-x-5 gap-y-3 rounded-lg bg-black/35 px-5 py-4 text-lg text-white/95">
+            <span class="inline-flex items-baseline gap-1.5">
+              <span class="font-semibold text-white">4.2</span>
+              <span aria-hidden="true" class="text-amber-300">&#9733;</span>
+              <span class="text-white/70">from 4,037 Google reviews</span>
             </span>
-            <span class="truncate rounded bg-white px-3 py-1 text-[11px] text-chrome-600">
-              https://www.bluebay1.com
-            </span>
-          </div>
-          <div class="flex items-start gap-3 px-5 py-5">
-            <span aria-hidden="true" class="mt-0.5 text-lg text-brand-600">&#9888;</span>
-            <div>
-              <p class="text-sm font-semibold text-chrome-800">Your connection is not private</p>
-              <p class="mt-1 text-[13px] leading-relaxed text-chrome-600">
-                Attackers might be trying to steal your information. This site has no valid
-                security certificate.
-              </p>
-            </div>
+            <span aria-hidden="true" class="text-white/30">|</span>
+            <span>2,154 five-star &middot; 1,069 four-star</span>
           </div>
         </div>
+      </div>
+    </div>
 
-        <p class="mt-6 text-sm text-chrome-600">
-          This sample shows the site that should be there instead.
+    <div class="scene-copy" data-copy="5">
+      <div class="shell">
+        <div class="grid gap-12 lg:grid-cols-[1.05fr_0.95fr] lg:items-center">
+          <div>
+            <p class="eyebrow text-brand-200 !text-[14px] sm:!text-[15px]">Hours &amp; location</p>
+            <h2 class="h-display mt-6 text-6xl sm:text-8xl lg:text-[7.5rem]">Find us on Francis Lewis Blvd.</h2>
+            <dl class="mt-10 space-y-7 text-2xl sm:text-3xl">
+              <div>
+                <dt class="eyebrow text-white/55 !text-[14px]">Address</dt>
+                <dd class="mt-1.5 font-medium leading-relaxed">58-50 Francis Lewis Blvd<br>Flushing, NY 11365</dd>
+              </div>
+              <div>
+                <dt class="eyebrow text-white/55 !text-[14px]">Phone</dt>
+                <dd class="mt-1.5 font-medium">
+                  <a href="tel:+17182256333" class="tap text-brand-200 underline decoration-brand-200/40 underline-offset-4">(718) 225-6333</a>
+                </dd>
+              </div>
+              <div>
+                <dt class="eyebrow text-white/55 !text-[14px]">Hours</dt>
+                <dd class="mt-1.5 font-medium">
+                  Open daily &middot; until 12 AM
+                  <span class="mt-1.5 block text-base font-normal text-white/70">Holiday hours may differ &mdash; please call ahead.</span>
+                </dd>
+              </div>
+            </dl>
+            <div class="mt-8 flex flex-col gap-3 sm:flex-row">
+              <a href="tel:+17182256333" class="btn-primary">Call now</a>
+              <a href="https://maps.google.com/?q=58-50+Francis+Lewis+Blvd,+Flushing,+NY+11365"
+                 target="_blank" rel="noopener" class="btn-ghost !border-white/40">Open in Google Maps</a>
+            </div>
+          </div>
+          <div class="overflow-hidden rounded-xl border border-white/10 shadow-lg">
+            <iframe title="Map showing Blue Bay Diner at 58-50 Francis Lewis Blvd, Flushing NY"
+                    src="https://www.google.com/maps?q=58-50%20Francis%20Lewis%20Blvd,%20Flushing,%20NY%2011365&output=embed"
+                    class="block h-[240px] w-full border-0 sm:h-[340px]"
+                    loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="scene-copy" data-copy="6">
+      <div class="shell text-center">
+        <p class="eyebrow text-brand-200 !text-[14px] sm:!text-[15px]">Ready when you are</p>
+        <h2 class="h-display mt-6 text-6xl sm:text-8xl lg:text-[7.5rem]">Hungry? Give us a call.</h2>
+        <p class="mx-auto mt-7 max-w-4xl text-xl leading-relaxed text-white/95 sm:text-3xl">
+          Open daily until midnight. Call ahead for specials, takeout, or a large order.
         </p>
+        <a href="tel:+17182256333" class="btn-primary mt-8 bg-white !text-brand-700 hover:!bg-cream-100">(718) 225-6333</a>
+        <p class="mt-9 text-lg text-white/80">58-50 Francis Lewis Blvd, Flushing, NY 11365</p>
       </div>
     </div>
-  </section>
 
-  <!-- ============ WHAT WE SERVE ============ -->
-  <section id="serve" class="scroll-mt-24 bg-cream-50">
-    <div class="shell py-16 sm:py-20">
-      <div class="max-w-2xl">
-        <p class="eyebrow text-brand-600">Our Kitchen</p>
-        <h2 class="h-display mt-3 text-3xl sm:text-4xl">Diner favorites, made to order</h2>
-        <p class="mt-4 leading-relaxed text-chrome-600">
-          Whether it is an early breakfast, a quick lunch, or a full dinner,
-          there is a table waiting. Nothing fancy &mdash; just generous plates
-          served the way a neighborhood diner should.
-        </p>
-      </div>
-
-      <div class="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
-        <div class="card">
-          <p class="eyebrow text-brand-600">Breakfast</p>
-          <h3 class="h-display mt-2 text-xl">Start the day early</h3>
-          <p class="mt-2 text-sm leading-relaxed text-chrome-600">
-            Hefty breakfast plates served from opening. Call ahead for large
-            orders or to ask what is on today.
-          </p>
-        </div>
-        <div class="card">
-          <p class="eyebrow text-brand-600">Lunch &amp; Dinner</p>
-          <h3 class="h-display mt-2 text-xl">Burgers &amp; classics</h3>
-          <p class="mt-2 text-sm leading-relaxed text-chrome-600">
-            Burgers and the diner standards you already know, cooked to order
-            and served through the evening.
-          </p>
-        </div>
-        <div class="card">
-          <p class="eyebrow text-brand-600">Desserts</p>
-          <h3 class="h-display mt-2 text-xl">Made from scratch</h3>
-          <p class="mt-2 text-sm leading-relaxed text-chrome-600">
-            Made-from-scratch desserts. Ask what is available today &mdash;
-            it changes.
-          </p>
-        </div>
-        <div class="card">
-          <p class="eyebrow text-brand-600">Takeout</p>
-          <h3 class="h-display mt-2 text-xl">Order by phone</h3>
-          <p class="mt-2 text-sm leading-relaxed text-chrome-600">
-            Call in and pick up. Straightforward and fast.
-          </p>
-        </div>
-        <div class="card">
-          <p class="eyebrow text-brand-600">Dine In</p>
-          <h3 class="h-display mt-2 text-xl">Seating seven days</h3>
-          <p class="mt-2 text-sm leading-relaxed text-chrome-600">
-            Open daily until midnight, with wheelchair accessible entrance.
-          </p>
-        </div>
-        <div class="card">
-          <p class="eyebrow text-brand-600">Large Orders</p>
-          <h3 class="h-display mt-2 text-xl">Feeding a crowd?</h3>
-          <p class="mt-2 text-sm leading-relaxed text-chrome-600">
-            Call the diner directly to arrange a large order ahead of time.
-          </p>
-        </div>
-      </div>
+    <!-- scene rail -->
+    <div id="rail" aria-hidden="true">
+      <span class="rail-dot is-on" data-rail="0"></span>
+      <span class="rail-dot" data-rail="1"></span>
+      <span class="rail-dot" data-rail="2"></span>
+      <span class="rail-dot" data-rail="3"></span>
+      <span class="rail-dot" data-rail="4"></span>
+      <span class="rail-dot" data-rail="5"></span>
+      <span class="rail-dot" data-rail="6"></span>
     </div>
-  </section>
+  </div>
 
-  <!-- ============ MENU (deliberate placeholder — never invent dishes or prices) ============ -->
-  <section id="menu" class="scroll-mt-24 border-y border-chrome-800/10 bg-cream-100">
-    <div class="shell py-16 sm:py-20">
-      <div class="grid gap-10 lg:grid-cols-[0.9fr_1.1fr] lg:items-center">
-        <div>
-          <p class="eyebrow text-brand-600">Menu</p>
-          <h2 class="h-display mt-3 text-3xl sm:text-4xl">Today's specials are a phone call away</h2>
-          <p class="mt-4 leading-relaxed text-chrome-600">
-            The full menu goes right here once it is confirmed &mdash; dishes,
-            prices, and daily specials, laid out and easy to read on a phone.
-            This section is intentionally left open so nothing on the page is
-            guessed at.
-          </p>
-          <a href="tel:+17182256333" class="btn-primary mt-7">Call (718) 225-6333</a>
-        </div>
-
-        <div class="ph min-h-[320px] p-8 sm:min-h-[380px]">
-          <div class="max-w-xs">
-            <p class="eyebrow text-brand-600">Menu space reserved</p>
-            <p class="h-display mt-3 text-2xl text-chrome-800">Your menu, your prices</p>
-            <p class="mt-3 text-sm leading-relaxed text-chrome-600">
-              Send over the menu and it drops straight into this layout &mdash;
-              no guessing, no made-up items.
-            </p>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ============ VISIT ============ -->
-  <section id="visit" class="scroll-mt-24 bg-cream-50">
-    <div class="shell py-16 sm:py-20">
-      <div class="max-w-2xl">
-        <p class="eyebrow text-brand-600">Hours &amp; Location</p>
-        <h2 class="h-display mt-3 text-3xl sm:text-4xl">Find us on Francis Lewis Blvd</h2>
-      </div>
-
-      <div class="mt-10 grid gap-6 lg:grid-cols-2">
-        <div class="card">
-          <h3 class="h-display text-xl">Address &amp; Contact</h3>
-          <dl class="mt-5 space-y-5 text-[15px]">
-            <div>
-              <dt class="eyebrow text-chrome-400">Address</dt>
-              <dd class="mt-1.5 font-medium leading-relaxed">
-                58-50 Francis Lewis Blvd<br>Flushing, NY 11365
-              </dd>
-            </div>
-            <div>
-              <dt class="eyebrow text-chrome-400">Phone</dt>
-              <dd class="mt-1.5 font-medium">
-                <a href="tel:+17182256333" class="tap text-brand-700 underline decoration-brand-200 underline-offset-4">
-                  (718) 225-6333
-                </a>
-              </dd>
-            </div>
-            <div>
-              <dt class="eyebrow text-chrome-400">Hours</dt>
-              <dd class="mt-1.5 font-medium">
-                Open daily &middot; until 12 AM
-                <span class="mt-1 block text-[13px] font-normal text-chrome-600">
-                  Holiday hours may differ &mdash; please call ahead.
-                </span>
-              </dd>
-            </div>
-          </dl>
-          <a href="https://maps.google.com/?q=58-50+Francis+Lewis+Blvd,+Flushing,+NY+11365"
-             target="_blank" rel="noopener" class="btn-primary mt-7 w-full sm:w-auto">Open in Google Maps</a>
-        </div>
-
-        <div class="overflow-hidden rounded-xl border border-chrome-800/10 shadow-sm">
-          <iframe
-            title="Map showing Blue Bay Diner at 58-50 Francis Lewis Blvd, Flushing NY"
-            src="https://www.google.com/maps?q=58-50%20Francis%20Lewis%20Blvd,%20Flushing,%20NY%2011365&output=embed"
-            class="block h-[320px] w-full border-0 sm:h-full sm:min-h-[420px]"
-            loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ============ CTA ============ -->
-  <section class="bg-brand-700 text-white">
-    <div class="shell py-14 text-center sm:py-16">
-      <h2 class="h-display text-3xl sm:text-4xl">Hungry? Give us a call.</h2>
-      <p class="mx-auto mt-4 max-w-xl leading-relaxed text-white/85">
-        We are open daily until midnight. Call ahead for specials, takeout,
-        or a large order.
-      </p>
-      <a href="tel:+17182256333" class="btn-primary mt-8 bg-white !text-brand-700 hover:!bg-cream-100">
-        (718) 225-6333
-      </a>
-    </div>
-  </section>
+  <!-- The runway reserves the scroll length that drives the whole sequence. -->
+  <div id="runway" aria-hidden="true" style="height:1200vh"></div>
 
 </main>
 
-<!-- ============ FOOTER (disclosure repeated — required) ============ -->
-<footer class="bg-chrome-800 text-white/80">
-  <div class="shell py-12">
-    <div class="grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
-      <div>
-        <p class="h-display text-xl text-white">Blue Bay Diner</p>
-        <p class="mt-3 text-sm leading-relaxed">
-          58-50 Francis Lewis Blvd<br>Flushing, NY 11365
-        </p>
-      </div>
-      <div>
-        <p class="eyebrow text-white/50">Contact</p>
-        <a href="tel:+17182256333" class="tap mt-2 text-sm text-white underline decoration-white/30 underline-offset-4 leading-none">
-          (718) 225-6333
-        </a>
-        <a href="https://maps.google.com/?q=58-50+Francis+Lewis+Blvd,+Flushing,+NY+11365"
-           target="_blank" rel="noopener" class="tap mt-1 block text-sm text-white/80 underline decoration-white/20 underline-offset-4 leading-none">
-          Get directions
-        </a>
-      </div>
-      <div>
-        <p class="eyebrow text-white/50">Hours</p>
-        <p class="mt-2 text-sm leading-relaxed">Open daily &middot; until 12 AM</p>
-      </div>
-    </div>
-
-    <div class="mt-10 border-t border-white/15 pt-6">
-      <p class="text-[13px] leading-relaxed">
-        <strong class="font-semibold text-white">Concept design — not affiliated with Blue Bay Diner.</strong>
-        This is an unsolicited design sample created to demonstrate a possible website.
-        It is not the official website of the business and was not commissioned by them.
-        Details shown are drawn from the business's public Google listing.
+<!-- ============ FOOTER: disclosure + attribution (required) ============ -->
+<footer class="relative z-20 bg-chrome-800 text-white/80">
+  <div class="shell py-4">
+    <div class="flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between sm:gap-6">
+      <p class="text-[14px] leading-snug text-white/70">
+        <strong class="font-semibold text-white/85">Concept design — not affiliated with Blue Bay Diner.</strong>
+        Unsolicited design sample; not their official site. Details from the business's public Google listing.
       </p>
+      <a href="tel:+17182256333" class="tap shrink-0 text-[15px] font-medium text-white underline decoration-white/30 underline-offset-4 leading-none">(718) 225-6333</a>
     </div>
+    <p class="mt-2 text-[12px] leading-snug text-white/50">
+      Representative stock photos (not of Blue Bay Diner), via Wikimedia Commons: &ldquo;Doyle's Diner Interior North&rdquo; (CC0),
+      &ldquo;Exmore Diner Interior North&rdquo; (CC0), &ldquo;Classic American Diner&rdquo; (CC BY-SA 3.0),
+      &ldquo;Burger at the Thumbs Up Diner&rdquo; (CC BY 4.0).
+    </p>
   </div>
 </footer>
 
